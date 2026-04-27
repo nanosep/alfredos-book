@@ -1,0 +1,21 @@
+---
+interface Metric {
+  label: string;
+  value: string;
+  note?: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  summary?: string;
+  metrics?: Metric[];
+}
+
+const { eyebrow, title } = Astro.props;
+---
+
+<section class="chapter-hero">
+  {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+  <h1>{title}</h1>
+</section>

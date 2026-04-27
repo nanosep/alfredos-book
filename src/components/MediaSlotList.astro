@@ -1,0 +1,54 @@
+---
+interface MediaSlot {
+  id: string;
+  kind: "image" | "video" | "graphic";
+  title: string;
+  purpose: string;
+  status: "placeholder" | "ready";
+  assetPath?: string;
+  caption?: string;
+}
+
+interface Props {
+  slots?: MediaSlot[];
+}
+
+const { slots = [] } = Astro.props;
+---
+
+<section class="media-panel">
+  <div class="media-panel__header">
+    <p class="eyebrow">Insertos</p>
+    <h2>Ritmo visual del capitulo</h2>
+  </div>
+
+  {slots.length > 0 ? (
+    <div class="media-slot-grid">
+      {slots.map((slot, index) => (
+        <article class="media-slot-card">
+          <div class="media-slot-card__meta">
+            <span>Inserto {index + 1}</span>
+            <span>{slot.status}</span>
+          </div>
+          <h3>{slot.title}</h3>
+          <p>{slot.purpose}</p>
+          <p class="media-slot-card__kind">{slot.kind}</p>
+          {slot.caption && <small>{slot.caption}</small>}
+          {slot.assetPath ? (
+            <code>{slot.assetPath}</code>
+          ) : (
+            <div class="media-slot-card__placeholder">Slot preparado para asset externo</div>
+          )}
+        </article>
+      ))}
+    </div>
+  ) : (
+    <article class="media-slot-card media-slot-card--empty">
+      <h3>Sin assets cargados todavia</h3>
+      <p>
+        La plantilla ya reserva una zona estable para imagenes, videos o
+        graficos de apoyo sin sustituir el texto principal.
+      </p>
+    </article>
+  )}
+</section>

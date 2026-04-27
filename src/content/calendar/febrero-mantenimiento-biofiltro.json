@@ -1,0 +1,11 @@
+{
+  "id": "febrero-mantenimiento-biofiltro",
+  "month": 2,
+  "title": "Revisar biofiltro y barreras de potabilizacion",
+  "sectionSlug": "fundamentos-infraestructura-hidrica",
+  "taskType": "revision tecnica",
+  "priority": "medium",
+  "summary": "Verificar nivel de agua sobre arena, limpieza de etapas finales y plan de recambio de consumibles cuando aplique.",
+  "relatedChapterSlugs": ["el-agua"],
+  "calculatorSlugs": []
+}

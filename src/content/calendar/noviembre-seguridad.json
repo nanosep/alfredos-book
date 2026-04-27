@@ -1,0 +1,11 @@
+{
+  "id": "noviembre-seguridad",
+  "month": 11,
+  "title": "Revision de seguridad perimetral e iluminacion",
+  "sectionSlug": "seguridad-perimetral",
+  "taskType": "revision tecnica",
+  "priority": "medium",
+  "summary": "Comprobar iluminacion por sensores, accesos, puntos ciegos y mantenimiento preventivo del perimetro.",
+  "relatedChapterSlugs": ["la-seguridad"],
+  "calculatorSlugs": []
+}

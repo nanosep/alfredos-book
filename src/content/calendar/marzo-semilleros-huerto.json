@@ -1,0 +1,11 @@
+{
+  "id": "marzo-semilleros-huerto",
+  "month": 3,
+  "title": "Planificar semilleros y arranque de huerto",
+  "sectionSlug": "huerta-gestion-suelo",
+  "taskType": "siembra",
+  "priority": "high",
+  "summary": "Preparar semilleros, revisar sustratos y organizar el calendario de siembra temprana.",
+  "relatedChapterSlugs": ["el-huerto"],
+  "calculatorSlugs": []
+}

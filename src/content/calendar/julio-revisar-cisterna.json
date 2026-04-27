@@ -1,0 +1,11 @@
+{
+  "id": "julio-revisar-cisterna",
+  "month": 7,
+  "title": "Controlar reservas de cisterna en estiaje",
+  "sectionSlug": "fundamentos-infraestructura-hidrica",
+  "taskType": "revision tecnica",
+  "priority": "critical",
+  "summary": "Comparar captacion prevista y consumo real durante los meses secos para anticipar restricciones o refuerzos.",
+  "relatedChapterSlugs": ["el-agua"],
+  "calculatorSlugs": ["captacion-lluvia"]
+}

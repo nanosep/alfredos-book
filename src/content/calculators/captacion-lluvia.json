@@ -1,0 +1,53 @@
+{
+  "id": "captacion-lluvia",
+  "slug": "captacion-lluvia",
+  "title": "Calculadora de captacion de lluvia",
+  "sectionSlug": "fundamentos-infraestructura-hidrica",
+  "summary": "Estima el volumen anual recuperable a partir de precipitacion, superficie y tipo de cubierta.",
+  "status": "active",
+  "inputs": [
+    {
+      "id": "precipitationMm",
+      "label": "Precipitacion anual",
+      "type": "number",
+      "unit": "mm",
+      "required": true,
+      "defaultValue": 1000,
+      "note": "Pluviometria media anual de la zona."
+    },
+    {
+      "id": "catchmentAreaM2",
+      "label": "Superficie de captacion",
+      "type": "number",
+      "unit": "m2",
+      "required": true,
+      "defaultValue": 60,
+      "note": "Area de cubierta o techo util."
+    },
+    {
+      "id": "runoffCoefficient",
+      "label": "Coeficiente de escorrentia",
+      "type": "select",
+      "required": true,
+      "defaultValue": "0.90",
+      "options": ["0.90", "0.85", "0.80", "0.60"],
+      "note": "Depende del material de cubierta."
+    }
+  ],
+  "outputs": [
+    {
+      "id": "recoverableLiters",
+      "label": "Volumen anual recuperable",
+      "unit": "L"
+    },
+    {
+      "id": "huertoCoverage",
+      "label": "Cobertura frente al huerto de referencia",
+      "unit": "%"
+    }
+  ],
+  "formulaNotes": [
+    "Volumen recuperable = precipitacion x area x coeficiente",
+    "La referencia de demanda del capitulo es 50.000 L al ano para 500 m2 de huerto."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "consumo-lena",
+  "slug": "consumo-lena",
+  "title": "Calculadora de consumo anual de leña",
+  "sectionSlug": "gestion-termica",
+  "summary": "Estima kilos y toneladas de leña necesarias para la temporada fria con margen de reserva.",
+  "status": "active",
+  "inputs": [
+    { "id": "winterMonths", "label": "Meses de uso intensivo", "type": "number", "unit": "meses", "required": true, "defaultValue": 5, "note": "Periodo principal de consumo." },
+    { "id": "dailyKg", "label": "Consumo diario medio", "type": "number", "unit": "kg", "required": true, "defaultValue": 18, "note": "Leña diaria en meses frios." },
+    { "id": "reservePercent", "label": "Margen de reserva", "type": "number", "unit": "%", "required": true, "defaultValue": 20, "note": "Cobertura ante invierno mas duro." }
+  ],
+  "outputs": [
+    { "id": "annualKg", "label": "Consumo anual base", "unit": "kg" },
+    { "id": "targetTons", "label": "Objetivo con reserva", "unit": "t" }
+  ],
+  "formulaNotes": [
+    "Consumo anual base = meses x 30 dias x kilos diarios.",
+    "El objetivo con reserva facilita acopio y rotacion de secado."
+  ]
+}

@@ -1,0 +1,133 @@
+---
+import CalculatorPanel from "./CalculatorPanel.astro";
+import type { ContentBlock } from "../lib/contentBlocks";
+import { renderProseBlock } from "../lib/contentBlocks";
+import { withBase } from "../lib/paths";
+
+interface CalculatorInput {
+  id: string;
+  label: string;
+  type: "number" | "select" | "boolean";
+  unit?: string;
+  required: boolean;
+  options?: string[];
+  note?: string;
+}
+
+interface CalculatorOutput {
+  id: string;
+  label: string;
+  unit?: string;
+  note?: string;
+}
+
+interface CalculatorEntry {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  inputs: CalculatorInput[];
+  outputs: CalculatorOutput[];
+  formulaNotes: string[];
+}
+
+interface Props {
+  blocks?: ContentBlock[];
+  calculators?: Array<{ data: CalculatorEntry }>;
+}
+
+const { blocks = [], calculators = [] } = Astro.props;
+const calculatorMap = new Map(calculators.map((entry) => [entry.data.slug, entry]));
+
+const isExplainer = (block: ContentBlock) =>
+  block.type === "insert" && (block.kind === "graphic" || block.variant === "graphic-explainer");
+
+const isSubstantialProse = (block: ContentBlock) => {
+  if (block.type !== "prose") return false;
+
+  const bodyText = block.content
+    .replace(/^#{1,6}\s.+$/gm, "")
+    .replace(/^\|.+\|$/gm, "")
+    .replace(/^[-*]\s.+$/gm, "")
+    .trim();
+
+  return bodyText.length > 300;
+};
+
+const substantialProseIndexes = blocks
+  .map((block, index) => (isSubstantialProse(block) ? index : -1))
+  .filter((index) => index >= 0);
+const explainerInsertionIndex = substantialProseIndexes[1] ?? substantialProseIndexes[0] ?? -1;
+const blocksBeforeRhythmBreak =
+  explainerInsertionIndex >= 0 ? blocks.slice(0, explainerInsertionIndex + 1) : [];
+const firstEarlyInsertIndex = blocksBeforeRhythmBreak.findIndex((block) => block.type === "insert");
+const shouldDeferEarlyInsert = (block: ContentBlock, index: number) =>
+  block.type === "insert" &&
+  (index !== firstEarlyInsertIndex || isExplainer(block));
+const earlyDeferredInserts = blocksBeforeRhythmBreak.filter(shouldDeferEarlyInsert);
+const earlyReadingFlow = blocksBeforeRhythmBreak.filter((block, index) => !shouldDeferEarlyInsert(block, index));
+
+const displayBlocks =
+  earlyDeferredInserts.length > 0 && explainerInsertionIndex >= 0
+    ? [
+        ...earlyReadingFlow,
+        ...earlyDeferredInserts,
+        ...blocks.slice(explainerInsertionIndex + 1)
+      ]
+    : blocks;
+---
+
+{displayBlocks.map((block) => {
+  if (block.type === "prose") {
+    return <Fragment set:html={renderProseBlock(block.content)} />;
+  }
+
+  if (block.type === "insert") {
+    if (!block.assetPath) {
+      return null;
+    }
+
+    const classes = [
+      "chapter-insert",
+      `chapter-insert--${block.variant ?? "default"}`,
+      `chapter-insert--${block.layout ?? "wide"}`
+    ].join(" ");
+    const assetStyle = [
+      block.objectPosition ? `--insert-object-position:${block.objectPosition}` : "",
+      block.maxWidth ? `--insert-max-width:${block.maxWidth}` : ""
+    ]
+      .filter(Boolean)
+      .join(";");
+
+    return (
+      <figure class={classes} data-insert-kind={block.kind}>
+        <figcaption class="chapter-insert__meta">
+          <h3>{block.title}</h3>
+        </figcaption>
+        <div class="chapter-insert__asset" style={assetStyle || undefined}>
+          <img src={withBase(block.assetPath)} alt={block.caption ?? block.title} decoding="async" />
+        </div>
+      </figure>
+    );
+  }
+
+  if (block.type === "calculator") {
+    const calculator = calculatorMap.get(block.slug);
+    if (!calculator) return null;
+    return (
+      <div class="chapter-inline-tool">
+        {block.title && <p class="eyebrow">{block.title}</p>}
+        {block.summary && <p class="chapter-inline-tool__summary">{block.summary}</p>}
+        <CalculatorPanel calculators={[calculator]} />
+      </div>
+    );
+  }
+
+  return (
+    <aside class="chapter-note">
+      <p class="eyebrow">Nota</p>
+      <h3>{block.title}</h3>
+      <p>{block.content}</p>
+    </aside>
+  );
+})}

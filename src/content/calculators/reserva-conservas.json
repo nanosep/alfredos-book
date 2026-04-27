@@ -1,0 +1,21 @@
+{
+  "id": "reserva-conservas",
+  "slug": "reserva-conservas",
+  "title": "Calculadora de reserva de conservas",
+  "sectionSlug": "tecnicas-conservacion",
+  "summary": "Calcula el numero minimo y objetivo de botes para una reserva anual segun consumo semanal.",
+  "status": "active",
+  "inputs": [
+    { "id": "jarsPerWeek", "label": "Botes consumidos por semana", "type": "number", "unit": "botes", "required": true, "defaultValue": 6, "note": "Consumo medio del nucleo familiar." },
+    { "id": "reserveWeeks", "label": "Semanas a cubrir", "type": "number", "unit": "semanas", "required": true, "defaultValue": 52, "note": "Horizonte de reserva buscado." },
+    { "id": "safetyPercent", "label": "Margen de seguridad", "type": "number", "unit": "%", "required": true, "defaultValue": 15, "note": "Colchon para picos de consumo o perdidas." }
+  ],
+  "outputs": [
+    { "id": "minimumJars", "label": "Reserva minima", "unit": "botes" },
+    { "id": "targetJars", "label": "Reserva objetivo", "unit": "botes" }
+  ],
+  "formulaNotes": [
+    "Reserva minima = consumo semanal x semanas cubiertas.",
+    "Reserva objetivo = reserva minima + margen de seguridad."
+  ]
+}

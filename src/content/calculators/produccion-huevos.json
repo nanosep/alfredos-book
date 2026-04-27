@@ -1,0 +1,21 @@
+{
+  "id": "produccion-huevos",
+  "slug": "produccion-huevos",
+  "title": "Calculadora de produccion de huevos",
+  "sectionSlug": "produccion-animal-derivados",
+  "summary": "Estima la produccion anual del gallinero y el reparto semanal por persona.",
+  "status": "active",
+  "inputs": [
+    { "id": "hens", "label": "Numero de gallinas", "type": "number", "unit": "aves", "required": true, "defaultValue": 8, "note": "Ponedoras activas." },
+    { "id": "eggsPerHenWeek", "label": "Huevos por gallina y semana", "type": "number", "unit": "huevos", "required": true, "defaultValue": 5, "note": "Promedio realista de postura." },
+    { "id": "people", "label": "Personas abastecidas", "type": "number", "unit": "personas", "required": true, "defaultValue": 4, "note": "Nucleo familiar de referencia." }
+  ],
+  "outputs": [
+    { "id": "annualEggs", "label": "Produccion anual", "unit": "huevos" },
+    { "id": "eggsPerPersonWeek", "label": "Huevos por persona y semana", "unit": "huevos" }
+  ],
+  "formulaNotes": [
+    "Produccion anual = gallinas x postura semanal x 52 semanas.",
+    "El reparto semanal por persona ayuda a ver suficiencia real del gallinero."
+  ]
+}

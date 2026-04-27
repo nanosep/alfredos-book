@@ -1,0 +1,11 @@
+{
+  "id": "mayo-trasplantes",
+  "month": 5,
+  "title": "Trasplantes y ajuste de riego",
+  "sectionSlug": "huerta-gestion-suelo",
+  "taskType": "trasplante",
+  "priority": "high",
+  "summary": "Mover plantones a su ubicacion definitiva y revisar necesidades de agua a medida que suben las temperaturas.",
+  "relatedChapterSlugs": ["el-huerto"],
+  "calculatorSlugs": []
+}

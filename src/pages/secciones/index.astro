@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../lib/paths";
+
+const sections = (await getCollection("sections")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Secciones | Salvese Quien Pueda">
+  <main class="page-shell">
+    <section class="hero">
+      <p class="eyebrow">Indice general</p>
+      <h1>Mapa del libro</h1>
+      <p class="lede">
+        El libro queda organizado por grandes bloques tematicos. Desde aqui la navegacion
+        debe sentirse como una tabla de contenidos editorial, con acceso inmediato a cada bloque.
+      </p>
+    </section>
+
+    <section class="status-grid status-grid--editorial">
+      {sections.map((section) => (
+        <article>
+          <p class="eyebrow">{section.data.bookLabel}</p>
+          <h2>
+            <a href={withBase(`/secciones/${section.slug}/`)}>{section.data.title}</a>
+          </h2>
+          <p>{section.data.summary}</p>
+        </article>
+      ))}
+    </section>
+  </main>
+</BaseLayout>

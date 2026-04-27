@@ -1,0 +1,144 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const monthNames = [
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre"
+];
+
+const calendarEntries = (await getCollection("calendar")).sort((a, b) => a.data.month - b.data.month);
+const sections = await getCollection("sections");
+const sectionMap = new Map(sections.map((section) => [section.slug, section.data.title]));
+const sectionFilters = sections.map((section) => ({
+  slug: section.slug,
+  title: section.data.title
+}));
+
+const groupedByMonth = monthNames.map((name, index) => ({
+  monthNumber: index + 1,
+  monthName: name,
+  entries: calendarEntries.filter((entry) => entry.data.month === index + 1)
+}));
+---
+
+<BaseLayout title="Calendario anual | Salvese Quien Pueda">
+  <main class="page-shell">
+    <section class="hero">
+      <p class="eyebrow">Herramienta transversal</p>
+      <h1>Calendario anual</h1>
+      <p class="lede">
+        Vista de tareas recurrentes del libro por mes, con filtro por bloque tematico
+        para recorrer el ano operativo de la finca desde la misma interfaz editorial.
+      </p>
+    </section>
+
+    <section class="calendar-toolbar" data-calendar-root>
+      <div class="calendar-toolbar__group">
+        <label for="calendar-month">Mes</label>
+        <select id="calendar-month" data-calendar-month>
+          <option value="all">Todo el ano</option>
+          {monthNames.map((month, index) => (
+            <option value={`${index + 1}`}>{month}</option>
+          ))}
+        </select>
+      </div>
+
+      <div class="calendar-toolbar__group">
+        <label for="calendar-section">Tema</label>
+        <select id="calendar-section" data-calendar-section>
+          <option value="all">Todas las secciones</option>
+          {sectionFilters.map((section) => (
+            <option value={section.slug}>{section.title}</option>
+          ))}
+        </select>
+      </div>
+    </section>
+
+    <section class="calendar-board" data-calendar-board>
+      {groupedByMonth.map((group) => (
+        <article class="calendar-month-card" data-month={group.monthNumber}>
+          <header class="calendar-month-card__header">
+            <p class="eyebrow">{group.monthNumber}</p>
+            <h2>{group.monthName}</h2>
+          </header>
+
+          <div class="calendar-month-card__body">
+            {group.entries.length > 0 ? (
+              group.entries.map((entry) => (
+                <article class="calendar-entry-card" data-section={entry.data.sectionSlug}>
+                  <div class="calendar-entry-card__meta">
+                    <span>{entry.data.taskType}</span>
+                    <span>{entry.data.priority}</span>
+                  </div>
+                  <h3>{entry.data.title}</h3>
+                  <p>{entry.data.summary}</p>
+                  <small>{sectionMap.get(entry.data.sectionSlug)}</small>
+                </article>
+              ))
+            ) : (
+              <p class="calendar-empty">Sin tareas registradas para este mes.</p>
+            )}
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <script>
+      const root = document.querySelector("[data-calendar-root]");
+      const board = document.querySelector("[data-calendar-board]");
+
+      if (root instanceof HTMLElement && board instanceof HTMLElement) {
+        const monthSelect = root.querySelector("[data-calendar-month]");
+        const sectionSelect = root.querySelector("[data-calendar-section]");
+        const monthCards = Array.from(board.querySelectorAll("[data-month]"));
+
+        if (monthSelect instanceof HTMLSelectElement && sectionSelect instanceof HTMLSelectElement) {
+          const applyFilters = () => {
+            const monthValue = monthSelect.value;
+            const sectionValue = sectionSelect.value;
+
+            monthCards.forEach((monthCard) => {
+              if (!(monthCard instanceof HTMLElement)) return;
+
+              const monthMatches = monthValue === "all" || monthCard.dataset.month === monthValue;
+              const entries = Array.from(monthCard.querySelectorAll("[data-section]"));
+              let visibleEntries = 0;
+
+              entries.forEach((entry) => {
+                if (!(entry instanceof HTMLElement)) return;
+
+                const sectionMatches = sectionValue === "all" || entry.dataset.section === sectionValue;
+                const visible = monthMatches && sectionMatches;
+                entry.style.display = visible ? "" : "none";
+                if (visible) visibleEntries += 1;
+              });
+
+              const emptyNode = monthCard.querySelector(".calendar-empty");
+              if (emptyNode instanceof HTMLElement) {
+                emptyNode.style.display = visibleEntries === 0 ? "" : "none";
+              }
+
+              monthCard.style.display =
+                monthMatches && (visibleEntries > 0 || sectionValue === "all") ? "" : "none";
+            });
+          };
+
+          monthSelect.addEventListener("change", applyFilters);
+          sectionSelect.addEventListener("change", applyFilters);
+          applyFilters();
+        }
+      }
+    </script>
+  </main>
+</BaseLayout>

@@ -1,0 +1,22 @@
+{
+  "id": "autonomia-solar",
+  "slug": "autonomia-solar",
+  "title": "Calculadora de autonomia solar diaria",
+  "sectionSlug": "ingenieria-energetica-comunicaciones",
+  "summary": "Compara la produccion solar diaria estimada frente al consumo electrico diario de la finca.",
+  "status": "active",
+  "inputs": [
+    { "id": "panelWp", "label": "Potencia FV instalada", "type": "number", "unit": "Wp", "required": true, "defaultValue": 3000, "note": "Suma total de paneles." },
+    { "id": "sunHours", "label": "Horas solares pico", "type": "number", "unit": "h", "required": true, "defaultValue": 4, "note": "Valor medio del periodo analizado." },
+    { "id": "performanceFactor", "label": "Factor de rendimiento", "type": "select", "required": true, "defaultValue": "0.75", "options": ["0.65", "0.75", "0.85"], "note": "Incluye perdidas de sistema." },
+    { "id": "dailyLoadWh", "label": "Consumo diario", "type": "number", "unit": "Wh", "required": true, "defaultValue": 6000, "note": "Carga total diaria estimada." }
+  ],
+  "outputs": [
+    { "id": "dailySolarWh", "label": "Produccion solar diaria", "unit": "Wh" },
+    { "id": "dailyBalanceWh", "label": "Balance diario", "unit": "Wh" }
+  ],
+  "formulaNotes": [
+    "Produccion = potencia FV x horas solares pico x factor de rendimiento.",
+    "El balance positivo indica margen sobre el consumo diario cargado."
+  ]
+}

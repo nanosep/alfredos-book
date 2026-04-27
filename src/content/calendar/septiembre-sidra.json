@@ -1,0 +1,11 @@
+{
+  "id": "septiembre-sidra",
+  "month": 9,
+  "title": "Preparar campana de sidra y manzana",
+  "sectionSlug": "cultivo-produccion-elaboracion",
+  "taskType": "cosecha",
+  "priority": "high",
+  "summary": "Organizar recogida, seleccion y proceso de elaboracion para la sidra de la temporada.",
+  "relatedChapterSlugs": ["el-pomar"],
+  "calculatorSlugs": []
+}

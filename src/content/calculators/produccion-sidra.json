@@ -1,0 +1,21 @@
+{
+  "id": "produccion-sidra",
+  "slug": "produccion-sidra",
+  "title": "Calculadora de produccion de sidra",
+  "sectionSlug": "cultivo-produccion-elaboracion",
+  "summary": "Convierte kilos de manzana en litros estimados de sidra y reserva sugerida.",
+  "status": "active",
+  "inputs": [
+    { "id": "appleKg", "label": "Manzana disponible", "type": "number", "unit": "kg", "required": true, "defaultValue": 300, "note": "Fruta util para lagar." },
+    { "id": "litersPer100Kg", "label": "Litros por 100 kg", "type": "number", "unit": "L", "required": true, "defaultValue": 65, "note": "Rendimiento medio de prensado." },
+    { "id": "reservePercent", "label": "Margen de reserva", "type": "number", "unit": "%", "required": true, "defaultValue": 15, "note": "Colchon para mermas y guarda." }
+  ],
+  "outputs": [
+    { "id": "sidraLiters", "label": "Sidra estimada", "unit": "L" },
+    { "id": "reserveLiters", "label": "Reserva sugerida", "unit": "L" }
+  ],
+  "formulaNotes": [
+    "Litros de sidra = (kg de manzana / 100) x rendimiento por 100 kg.",
+    "La reserva ayuda a absorber mermas de elaboracion y guarda."
+  ]
+}

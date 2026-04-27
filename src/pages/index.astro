@@ -1,0 +1,180 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/paths";
+---
+
+<BaseLayout
+  title="S&aacute;lvese Quien Pueda"
+  description="Edicion digital del libro Salvese Quien Pueda."
+>
+  <main class="home-cover">
+    <section class="cover-hero">
+      <div class="cover-hero__copy">
+        <p class="eyebrow">Edici&oacute;n digital del libro</p>
+        <h1>S&aacute;lvese Quien Pueda</h1>
+        <p class="cover-hero__kicker">Gu&iacute;a para la autosuficiencia integral</p>
+        <p class="cover-hero__text">
+          Un manual de finca, t&eacute;cnica y criterio pr&aacute;ctico para recuperar autonom&iacute;a en
+          el agua, la energ&iacute;a, la salud, el alimento y el mantenimiento cotidiano.
+        </p>
+        <nav class="cover-actions" aria-label="Accesos principales">
+          <a href={withBase("/secciones/")} class="cover-action cover-action--primary">Entrar en el libro</a>
+          <a href={withBase("/secciones/fundamentos-infraestructura-hidrica/el-agua/")} class="cover-action">
+            Leer cap&iacute;tulo 1
+          </a>
+          <a href={withBase("/calendario/")} class="cover-action">Calendario y calculadoras</a>
+        </nav>
+      </div>
+      <figure class="cover-hero__image">
+        <img
+          src={withBase("/media/cover/cover-hero-finca-sistema.png")}
+          alt="Finca autosuficiente con huerta, herramientas y gestion del terreno"
+        />
+      </figure>
+    </section>
+
+    <section class="cover-about">
+      <article class="cover-card cover-card--thesis">
+        <p class="eyebrow">Por qu&eacute; este libro</p>
+        <h2>Una finca como sistema vivo</h2>
+        <figure class="cover-card__image">
+          <img
+            src={withBase("/media/cover/cover-finca-sistema-vivo.png")}
+            alt="Finca organizada como sistema de agua, huerta, compost y mantenimiento"
+          />
+        </figure>
+        <p>
+          La autosuficiencia aqu&iacute; no se presenta como nostalgia ni como huida. Es una
+          disciplina: observar, calcular, reparar, cultivar, conservar y proteger. La
+          finca de dos hectareas funciona como unidad de trabajo, refugio y escuela.
+        </p>
+      </article>
+    </section>
+
+    <section class="cover-prologue" aria-labelledby="prologo-title">
+      <div class="cover-section-heading">
+        <p class="eyebrow">Pr&oacute;logo</p>
+        <h2 id="prologo-title">Tratado breve sobre la autosuficiencia integral</h2>
+        <p>
+          El pr&oacute;logo se ordena aqu&iacute; como lectura de entrada: menos bloque continuo,
+          mas ritmo visual y una idea clara por tramo.
+        </p>
+      </div>
+
+      <article class="prologue-block prologue-block--lead">
+        <div>
+          <p class="eyebrow">I. Autonomia</p>
+          <h3>No volver atras, sino aprender a sostenerse</h3>
+          <p>
+            La transicion hacia la autonomia plena en el siglo XXI no representa un
+            retroceso tecnologico, sino una evolucion hacia la madurez tecnica y la
+            responsabilidad individual. En un contexto de fragilidad en las redes de
+            suministro, una finca bien pensada se convierte en infraestructura propia.
+          </p>
+          <p>
+            La propuesta de <em>Salvese quien pueda</em> es sistemica: agua, energia,
+            alimento, salud, herramientas, bosque y seguridad no son capitulos
+            aislados, sino piezas de un organismo que debe funcionar con redundancia.
+          </p>
+        </div>
+        <figure>
+          <img src={withBase("/media/cover/cover-autonomia-mantenimiento.png")} alt="Revision de infraestructura de agua en una finca rural" />
+        </figure>
+      </article>
+
+      <article class="prologue-block">
+        <figure>
+          <img src={withBase("/media/cover/cover-agua-energia.png")} alt="Paneles solares, deposito de agua y bomba en una finca rural" />
+        </figure>
+        <div>
+          <p class="eyebrow">II. Agua y energia</p>
+          <h3>Los dos sistemas que lo sostienen todo</h3>
+          <p>
+            El agua es el eje central de cualquier proyecto de autonomia rural: hidrata,
+            riega, limpia y, cuando la topografia lo permite, produce energia. Por eso
+            la gestion hidrica debe combinar captacion, almacenamiento, potabilizacion
+            y mantenimiento sanitario.
+          </p>
+          <p>
+            La electricidad completa esa base. Fotovoltaica, baterias, microhidraulica
+            y comunicaciones no son comodidades: son la condicion para que la finca
+            siga operando cuando el entorno falla.
+          </p>
+        </div>
+      </article>
+
+      <article class="prologue-block">
+        <div>
+          <p class="eyebrow">III. Oficios</p>
+          <h3>Reparar es una forma de independencia</h3>
+          <p>
+            La operatividad de una finca depende de su taller. Un banco ordenado,
+            herramientas bien elegidas y capacidad de soldar, cortar, afilar y
+            diagnosticar convierten una averia en una tarea, no en una crisis.
+          </p>
+          <p>
+            La autosuficiencia real no se mide solo por lo que se produce, sino por lo
+            que se sabe mantener: bombas, paneles, motores, cercas, herramientas,
+            chimeneas, colmenas y despensas.
+          </p>
+        </div>
+        <figure>
+          <img src={withBase("/media/cover/cover-oficios-taller.png")} alt="Banco de taller rural con herramientas de reparacion" />
+        </figure>
+      </article>
+
+      <article class="prologue-block">
+        <figure>
+          <img src={withBase("/media/cover/cover-tierra-alimento.png")} alt="Compostera activa, bancales y huerto en una finca rural" />
+        </figure>
+        <div>
+          <p class="eyebrow">IV. Tierra y alimento</p>
+          <h3>Cerrar ciclos, no acumular objetos</h3>
+          <p>
+            El suelo es el capital biologico de la finca. Compost, rotaciones, frutales,
+            bosque, gallinas, abejas y conservas forman una cadena: producir, transformar
+            y guardar para atravesar el invierno.
+          </p>
+          <p>
+            El libro insiste en una idea sobria: la libertad no aparece por declararla,
+            sino por dominar tareas concretas y repetirlas hasta que se vuelven cultura.
+          </p>
+        </div>
+      </article>
+
+      <article class="prologue-closing">
+        <div>
+          <p class="eyebrow">Cierre</p>
+          <p>
+            La autosuficiencia no es un destino, sino un camino de aprendizaje continuo y
+            respeto profundo por la tierra que nos sostiene.
+          </p>
+        </div>
+        <figure>
+          <img src={withBase("/media/cover/cover-cierre-tierra.png")} alt="Mano trabajando la tierra junto a una planta joven" />
+        </figure>
+      </article>
+    </section>
+
+    <section class="cover-dedication">
+      <p class="eyebrow">Dedicatoria</p>
+      <h2>A mis sobrinos</h2>
+      <p>Camen, Mila, Alfonso, Javier, Dora, Celso, Laura, Teresa e Inigo.</p>
+    </section>
+
+    <section class="cover-author-note">
+      <p class="eyebrow">Sobre el autor</p>
+      <h2>Alfredo Garc&iacute;a de Tu&ntilde;on</h2>
+      <p>
+        Cazador, lector voraz y hombre de curiosidad renacentista, Alfredo Garc&iacute;a
+        de Tu&ntilde;on mira la finca como otros miran un mapa antiguo: un territorio de
+        aventura, memoria y responsabilidad. Le interesan la historia, los viajes,
+        los oficios utiles y esa clase de conocimiento que se aprende con las manos,
+        caminando el monte o escuchando a quienes saben. Este libro nace de esa
+        mezcla de inquietud y experiencia: la pregunta sencilla, y cada vez mas
+        urgente, de que haria falta saber para sostener una vida mas libre, mas
+        preparada y menos dependiente.
+      </p>
+    </section>
+  </main>
+</BaseLayout>

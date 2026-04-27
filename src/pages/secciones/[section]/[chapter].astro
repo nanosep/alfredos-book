@@ -1,0 +1,62 @@
+---
+import { getCollection, render } from "astro:content";
+import CalculatorPanel from "../../../components/CalculatorPanel.astro";
+import ChapterContentBlocks from "../../../components/ChapterContentBlocks.astro";
+import ChapterShell from "../../../components/ChapterShell.astro";
+import MediaSlotList from "../../../components/MediaSlotList.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const sections = await getCollection("sections");
+  const chapters = await getCollection("chapters");
+
+  return chapters.map((chapter) => {
+    const section = sections.find((entry) => entry.slug === chapter.data.sectionSlug);
+    if (!section) {
+      throw new Error(`Missing section for chapter ${chapter.slug}`);
+    }
+
+    return {
+      params: {
+        section: section.slug,
+        chapter: chapter.slug
+      },
+      props: {
+        section,
+        chapter
+      }
+    };
+  });
+}
+
+const { section, chapter } = Astro.props;
+const blockCalculatorSlugs = chapter.data.contentBlocks
+  .filter((block) => block.type === "calculator")
+  .map((block) => block.slug);
+const calculatorSlugs = Array.from(new Set([...chapter.data.calculatorSlugs, ...blockCalculatorSlugs]));
+const calculators = (await getCollection("calculators")).filter((entry) => calculatorSlugs.includes(entry.data.slug));
+const { Content } = await render(chapter);
+const hasContentBlocks = chapter.data.contentBlocks.length > 0;
+---
+
+<BaseLayout title={`${chapter.data.title} | Salvese Quien Pueda`}>
+  <main class="page-shell">
+    <ChapterShell
+      sectionTitle={section.data.title}
+      sectionHref={`/secciones/${section.slug}/`}
+      chapterLabel={chapter.data.bookLabel}
+      title={chapter.data.title}
+      summary={chapter.data.summary}
+      metrics={chapter.data.keyMetrics}
+    >
+      {hasContentBlocks ? (
+        <ChapterContentBlocks blocks={chapter.data.contentBlocks} calculators={calculators} />
+      ) : (
+        <Content />
+      )}
+    </ChapterShell>
+
+    {!hasContentBlocks && chapter.data.mediaSlots.length > 0 && <MediaSlotList slots={chapter.data.mediaSlots} />}
+    {!hasContentBlocks && calculators.length > 0 && <CalculatorPanel calculators={calculators} />}
+  </main>
+</BaseLayout>

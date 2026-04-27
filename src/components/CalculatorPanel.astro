@@ -1,0 +1,337 @@
+---
+interface CalculatorInput {
+  id: string;
+  label: string;
+  type: "number" | "select" | "boolean";
+  unit?: string;
+  required: boolean;
+  defaultValue?: number | string | boolean;
+  options?: string[];
+  note?: string;
+}
+
+interface CalculatorOutput {
+  id: string;
+  label: string;
+  unit?: string;
+  note?: string;
+}
+
+interface CalculatorEntry {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  inputs: CalculatorInput[];
+  outputs: CalculatorOutput[];
+  formulaNotes: string[];
+}
+
+interface Props {
+  calculators?: Array<{ data: CalculatorEntry }>;
+}
+
+const { calculators = [] } = Astro.props;
+
+const getDefaultValue = (entry: CalculatorEntry, inputId: string) =>
+  entry.inputs.find((input) => input.id === inputId)?.defaultValue;
+
+const readDefaultNumber = (entry: CalculatorEntry, inputId: string) =>
+  Number(getDefaultValue(entry, inputId) ?? 0);
+
+const computeInitialOutputs = (entry: CalculatorEntry) => {
+  switch (entry.slug) {
+    case "captacion-lluvia": {
+      const precipitation = readDefaultNumber(entry, "precipitationMm");
+      const area = readDefaultNumber(entry, "catchmentAreaM2");
+      const coefficient = readDefaultNumber(entry, "runoffCoefficient");
+      const liters = Math.max(0, precipitation * area * coefficient);
+      const coverage = (liters / 50000) * 100;
+      return {
+        recoverableLiters: `${Math.round(liters).toLocaleString("es-ES")} L`,
+        huertoCoverage: `${coverage.toLocaleString("es-ES", {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        })} %`
+      };
+    }
+    case "autonomia-solar": {
+      const panelWp = readDefaultNumber(entry, "panelWp");
+      const sunHours = readDefaultNumber(entry, "sunHours");
+      const performance = readDefaultNumber(entry, "performanceFactor");
+      const dailyLoad = readDefaultNumber(entry, "dailyLoadWh");
+      const production = panelWp * sunHours * performance;
+      const balance = production - dailyLoad;
+      return {
+        dailySolarWh: `${Math.round(production).toLocaleString("es-ES")} Wh`,
+        dailyBalanceWh: `${Math.round(balance).toLocaleString("es-ES")} Wh`
+      };
+    }
+    case "superficie-huerto": {
+      const people = readDefaultNumber(entry, "people");
+      const areaPerPerson = readDefaultNumber(entry, "areaPerPerson");
+      const irrigationLiters = readDefaultNumber(entry, "irrigationLitersM2Year");
+      const totalArea = people * areaPerPerson;
+      const annualLiters = totalArea * irrigationLiters;
+      return {
+        recommendedArea: `${Math.round(totalArea).toLocaleString("es-ES")} m2`,
+        annualIrrigationNeed: `${Math.round(annualLiters).toLocaleString("es-ES")} L`
+      };
+    }
+    case "plantacion-frutal": {
+      const area = readDefaultNumber(entry, "availableAreaM2");
+      const spacing = readDefaultNumber(entry, "spacingMeters");
+      const yieldPerTree = readDefaultNumber(entry, "yieldKgPerTree");
+      const trees = spacing > 0 ? Math.floor(area / (spacing * spacing)) : 0;
+      const yieldKg = trees * yieldPerTree;
+      return {
+        treeCount: `${trees.toLocaleString("es-ES")} arboles`,
+        annualYieldKg: `${Math.round(yieldKg).toLocaleString("es-ES")} kg`
+      };
+    }
+    case "produccion-sidra": {
+      const appleKg = readDefaultNumber(entry, "appleKg");
+      const litersPer100Kg = readDefaultNumber(entry, "litersPer100Kg");
+      const reservePercent = readDefaultNumber(entry, "reservePercent");
+      const liters = (appleKg / 100) * litersPer100Kg;
+      const reserve = liters * (reservePercent / 100);
+      return {
+        sidraLiters: `${liters.toLocaleString("es-ES", {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        })} L`,
+        reserveLiters: `${reserve.toLocaleString("es-ES", {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        })} L`
+      };
+    }
+    case "produccion-huevos": {
+      const hens = readDefaultNumber(entry, "hens");
+      const eggsPerHenWeek = readDefaultNumber(entry, "eggsPerHenWeek");
+      const people = readDefaultNumber(entry, "people");
+      const annualEggs = hens * eggsPerHenWeek * 52;
+      const eggsPerPersonWeek = people > 0 ? annualEggs / people / 52 : 0;
+      return {
+        annualEggs: `${Math.round(annualEggs).toLocaleString("es-ES")} huevos`,
+        eggsPerPersonWeek: `${eggsPerPersonWeek.toLocaleString("es-ES", {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        })} huevos`
+      };
+    }
+    case "reserva-conservas": {
+      const jarsPerWeek = readDefaultNumber(entry, "jarsPerWeek");
+      const reserveWeeks = readDefaultNumber(entry, "reserveWeeks");
+      const safetyPercent = readDefaultNumber(entry, "safetyPercent");
+      const jars = jarsPerWeek * reserveWeeks;
+      const target = jars * (1 + safetyPercent / 100);
+      return {
+        minimumJars: `${Math.round(jars).toLocaleString("es-ES")} botes`,
+        targetJars: `${Math.round(target).toLocaleString("es-ES")} botes`
+      };
+    }
+    case "consumo-lena": {
+      const winterMonths = readDefaultNumber(entry, "winterMonths");
+      const dailyKg = readDefaultNumber(entry, "dailyKg");
+      const reservePercent = readDefaultNumber(entry, "reservePercent");
+      const annualKg = winterMonths * 30 * dailyKg;
+      const targetKg = annualKg * (1 + reservePercent / 100);
+      return {
+        annualKg: `${Math.round(annualKg).toLocaleString("es-ES")} kg`,
+        targetTons: `${(targetKg / 1000).toLocaleString("es-ES", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })} t`
+      };
+    }
+    default:
+      return {};
+  }
+};
+---
+
+{calculators.length > 0 && (
+  <div class="calculator-stack">
+    {calculators.map((entry) => (
+      <section
+        class="calculator-panel"
+        data-calculator-slug={entry.data.slug}
+        data-initial-outputs={JSON.stringify(computeInitialOutputs(entry.data))}
+      >
+        <div class="calculator-panel__header">
+          <p class="eyebrow">Herramienta</p>
+          <h2>{entry.data.title}</h2>
+          <p>{entry.data.summary}</p>
+        </div>
+
+        <form class="calculator-form">
+          {entry.data.inputs.map((input) => (
+            <label class="calculator-field">
+              <span>
+                {input.label}
+                {input.unit && <small>{input.unit}</small>}
+              </span>
+              {input.type === "select" ? (
+                <select name={input.id}>
+                  {input.options?.map((option) => (
+                    <option value={option} selected={String(input.defaultValue ?? "") === option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  type="number"
+                  name={input.id}
+                  step="any"
+                  min="0"
+                  value={typeof input.defaultValue === "number" ? input.defaultValue : undefined}
+                />
+              )}
+              {input.note && <small>{input.note}</small>}
+            </label>
+          ))}
+        </form>
+
+        <div class="calculator-results">
+          {entry.data.outputs.map((output) => {
+            const initialOutputs = computeInitialOutputs(entry.data);
+            const initialValue =
+              initialOutputs[output.id as keyof typeof initialOutputs] ?? `0${output.unit ? ` ${output.unit}` : ""}`;
+
+            return (
+              <article>
+                <span>{output.label}</span>
+                <strong data-output={output.id}>{initialValue}</strong>
+                {output.note && <small>{output.note}</small>}
+              </article>
+            );
+          })}
+        </div>
+
+        <ul class="calculator-notes">
+          {entry.data.formulaNotes.map((note) => (
+            <li>{note}</li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <script is:inline>
+      const formatNumber = (value, digits = 0) =>
+        Number(value).toLocaleString("es-ES", {
+          minimumFractionDigits: digits,
+          maximumFractionDigits: digits
+        });
+
+      const readNumber = (form, name) => Number(new FormData(form).get(name) || 0);
+
+      const calculators = Array.from(document.querySelectorAll("[data-calculator-slug]"));
+
+      const computeCalculator = (root) => {
+        const form = root.querySelector(".calculator-form");
+        const slug = root.dataset.calculatorSlug;
+        if (!form || !slug) return;
+
+        const setOutput = (key, value, unit = "", digits = 0) => {
+          const node = root.querySelector(`[data-output="${key}"]`);
+          if (node) {
+            node.textContent = `${formatNumber(value, digits)}${unit ? ` ${unit}` : ""}`;
+          }
+        };
+
+        switch (slug) {
+          case "captacion-lluvia": {
+            const precipitation = readNumber(form, "precipitationMm");
+            const area = readNumber(form, "catchmentAreaM2");
+            const coefficient = readNumber(form, "runoffCoefficient");
+            const liters = Math.max(0, precipitation * area * coefficient);
+            const coverage = (liters / 50000) * 100;
+            setOutput("recoverableLiters", Math.round(liters), "L");
+            setOutput("huertoCoverage", coverage, "%", 1);
+            break;
+          }
+          case "autonomia-solar": {
+            const panelWp = readNumber(form, "panelWp");
+            const sunHours = readNumber(form, "sunHours");
+            const performance = readNumber(form, "performanceFactor");
+            const dailyLoad = readNumber(form, "dailyLoadWh");
+            const production = panelWp * sunHours * performance;
+            const balance = production - dailyLoad;
+            setOutput("dailySolarWh", Math.round(production), "Wh");
+            setOutput("dailyBalanceWh", Math.round(balance), "Wh");
+            break;
+          }
+          case "superficie-huerto": {
+            const people = readNumber(form, "people");
+            const areaPerPerson = readNumber(form, "areaPerPerson");
+            const irrigationLiters = readNumber(form, "irrigationLitersM2Year");
+            const totalArea = people * areaPerPerson;
+            const annualLiters = totalArea * irrigationLiters;
+            setOutput("recommendedArea", totalArea, "m2");
+            setOutput("annualIrrigationNeed", Math.round(annualLiters), "L");
+            break;
+          }
+          case "plantacion-frutal": {
+            const area = readNumber(form, "availableAreaM2");
+            const spacing = readNumber(form, "spacingMeters");
+            const yieldPerTree = readNumber(form, "yieldKgPerTree");
+            const trees = spacing > 0 ? Math.floor(area / (spacing * spacing)) : 0;
+            const yieldKg = trees * yieldPerTree;
+            setOutput("treeCount", trees, "arboles");
+            setOutput("annualYieldKg", Math.round(yieldKg), "kg");
+            break;
+          }
+          case "produccion-sidra": {
+            const appleKg = readNumber(form, "appleKg");
+            const litersPer100Kg = readNumber(form, "litersPer100Kg");
+            const reservePercent = readNumber(form, "reservePercent");
+            const liters = (appleKg / 100) * litersPer100Kg;
+            const reserve = liters * (reservePercent / 100);
+            setOutput("sidraLiters", liters, "L", 1);
+            setOutput("reserveLiters", reserve, "L", 1);
+            break;
+          }
+          case "produccion-huevos": {
+            const hens = readNumber(form, "hens");
+            const eggsPerHenWeek = readNumber(form, "eggsPerHenWeek");
+            const people = readNumber(form, "people");
+            const annualEggs = hens * eggsPerHenWeek * 52;
+            const eggsPerPersonWeek = people > 0 ? annualEggs / people / 52 : 0;
+            setOutput("annualEggs", Math.round(annualEggs), "huevos");
+            setOutput("eggsPerPersonWeek", eggsPerPersonWeek, "huevos", 1);
+            break;
+          }
+          case "reserva-conservas": {
+            const jarsPerWeek = readNumber(form, "jarsPerWeek");
+            const reserveWeeks = readNumber(form, "reserveWeeks");
+            const safetyPercent = readNumber(form, "safetyPercent");
+            const jars = jarsPerWeek * reserveWeeks;
+            const target = jars * (1 + safetyPercent / 100);
+            setOutput("minimumJars", Math.round(jars), "botes");
+            setOutput("targetJars", Math.round(target), "botes");
+            break;
+          }
+          case "consumo-lena": {
+            const winterMonths = readNumber(form, "winterMonths");
+            const dailyKg = readNumber(form, "dailyKg");
+            const reservePercent = readNumber(form, "reservePercent");
+            const annualKg = winterMonths * 30 * dailyKg;
+            const targetKg = annualKg * (1 + reservePercent / 100);
+            setOutput("annualKg", Math.round(annualKg), "kg");
+            setOutput("targetTons", targetKg / 1000, "t", 2);
+            break;
+          }
+        }
+      };
+
+      calculators.forEach((root) => {
+        const form = root.querySelector(".calculator-form");
+        if (!form) return;
+        form.addEventListener("input", () => computeCalculator(root));
+        computeCalculator(root);
+      });
+    </script>
+  </div>
+)}

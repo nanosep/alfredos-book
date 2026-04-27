@@ -1,0 +1,51 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBase } from "../../lib/paths";
+
+export async function getStaticPaths() {
+  const sections = await getCollection("sections");
+  return sections.map((section) => ({
+    params: { section: section.slug },
+    props: { section }
+  }));
+}
+
+const { section } = Astro.props;
+const chapters = (await getCollection("chapters"))
+  .filter((chapter) => chapter.data.sectionSlug === section.slug)
+  .sort((a, b) => a.data.order - b.data.order);
+const coverSlot = section.data.coverSlot;
+---
+
+<BaseLayout title={`${section.data.title} | Salvese Quien Pueda`}>
+  <main class="page-shell">
+    <a href={withBase("/secciones/")} class="back-link">Volver al indice</a>
+
+    <section class="hero">
+      <p class="eyebrow">{section.data.bookLabel}</p>
+      <h1>{section.data.title}</h1>
+      <p class="lede">{section.data.summary}</p>
+      {coverSlot?.assetPath && (
+        <figure class="section-cover">
+          <img src={withBase(coverSlot.assetPath)} alt={coverSlot.caption ?? coverSlot.title} loading="eager" />
+          {coverSlot.caption && <figcaption>{coverSlot.caption}</figcaption>}
+        </figure>
+      )}
+    </section>
+
+    <section class="status-grid status-grid--editorial">
+      {chapters.map((chapter) => (
+        <article>
+          <p class="eyebrow">{chapter.data.bookLabel}</p>
+          <h2>
+            <a href={withBase(`/secciones/${section.slug}/${chapter.slug}/`)}>
+              {chapter.data.title}
+            </a>
+          </h2>
+          <p>{chapter.data.summary}</p>
+        </article>
+      ))}
+    </section>
+  </main>
+</BaseLayout>

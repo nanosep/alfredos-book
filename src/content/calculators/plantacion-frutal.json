@@ -1,0 +1,21 @@
+{
+  "id": "plantacion-frutal",
+  "slug": "plantacion-frutal",
+  "title": "Calculadora de plantacion frutal",
+  "sectionSlug": "frutales-bosque-autoctono",
+  "summary": "Estima numero de arboles y produccion anual esperable segun superficie disponible y marco de plantacion.",
+  "status": "active",
+  "inputs": [
+    { "id": "availableAreaM2", "label": "Superficie disponible", "type": "number", "unit": "m2", "required": true, "defaultValue": 1200, "note": "Area util para el marco de plantacion." },
+    { "id": "spacingMeters", "label": "Marco de plantacion", "type": "number", "unit": "m", "required": true, "defaultValue": 5, "note": "Separacion media entre arboles." },
+    { "id": "yieldKgPerTree", "label": "Produccion por arbol", "type": "number", "unit": "kg", "required": true, "defaultValue": 35, "note": "Rendimiento anual medio esperado." }
+  ],
+  "outputs": [
+    { "id": "treeCount", "label": "Arboles estimados", "unit": "arboles" },
+    { "id": "annualYieldKg", "label": "Produccion anual estimada", "unit": "kg" }
+  ],
+  "formulaNotes": [
+    "Numero de arboles = superficie disponible / (marco x marco).",
+    "La cifra final debe ajustarse con calles, accesos y variedades compatibles."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "superficie-huerto",
+  "slug": "superficie-huerto",
+  "title": "Calculadora de superficie y riego del huerto",
+  "sectionSlug": "huerta-gestion-suelo",
+  "summary": "Estima superficie de huerto y necesidad anual de riego a partir del tamano del nucleo familiar.",
+  "status": "active",
+  "inputs": [
+    { "id": "people", "label": "Personas del nucleo", "type": "number", "unit": "personas", "required": true, "defaultValue": 4, "note": "Unidad familiar a abastecer." },
+    { "id": "areaPerPerson", "label": "Superficie por persona", "type": "number", "unit": "m2", "required": true, "defaultValue": 125, "note": "Referencia editable segun intensidad del huerto." },
+    { "id": "irrigationLitersM2Year", "label": "Riego anual por m2", "type": "number", "unit": "L", "required": true, "defaultValue": 100, "note": "Valor de partida para el cultivo anual." }
+  ],
+  "outputs": [
+    { "id": "recommendedArea", "label": "Superficie recomendada", "unit": "m2" },
+    { "id": "annualIrrigationNeed", "label": "Demanda anual de riego", "unit": "L" }
+  ],
+  "formulaNotes": [
+    "Superficie total = personas x superficie por persona.",
+    "Demanda anual = superficie total x litros por m2 al ano."
+  ]
+}

@@ -1,0 +1,38 @@
+---
+import { withBase } from "../lib/paths";
+
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  navItems?: NavItem[];
+}
+
+const {
+  navItems = [
+    { href: "/", label: "Inicio" },
+    { href: "/secciones/", label: "Secciones" },
+    { href: "/calendario/", label: "Calendario" }
+  ]
+} = Astro.props;
+---
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href={withBase("/")} class="site-header__brand">
+      <span class="site-header__mark">SQP</span>
+      <span>
+        <strong>Salvese Quien Pueda</strong>
+        <small>Libro web en Astro</small>
+      </span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Navegacion principal">
+      {navItems.map((item) => (
+        <a href={withBase(item.href)}>{item.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

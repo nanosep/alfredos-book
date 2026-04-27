@@ -1,0 +1,70 @@
+---
+import { getCollection } from "astro:content";
+import { withBase, withoutBase } from "../lib/paths";
+
+const pathname = withoutBase(Astro.url.pathname);
+const sections = (await getCollection("sections")).sort((a, b) => a.data.order - b.data.order);
+const chapters = (await getCollection("chapters")).sort((a, b) => a.data.order - b.data.order);
+
+const introHref = "/";
+
+const stripHash = (href: string) => href.split("#")[0] || "/";
+const normalize = (href: string) => {
+  const base = stripHash(href);
+  return base.endsWith("/") ? base : `${base}/`;
+};
+const currentPath = normalize(pathname);
+const isCurrent = (href: string) => currentPath === normalize(href);
+const isWithin = (href: string) => currentPath.startsWith(normalize(href));
+---
+
+<aside class="book-sidebar">
+  <div class="book-sidebar__inner">
+    <a href={withBase("/")} class="book-sidebar__brand">
+      <span class="book-sidebar__mark">SQP</span>
+      <span>
+        <strong>Salvese Quien Pueda</strong>
+        <small>Edicion digital del libro</small>
+      </span>
+    </a>
+
+    <nav class="book-nav" aria-label="Indice del libro">
+      <section class="book-nav__group">
+        <div class="book-nav__links">
+          <a href={withBase(introHref)} class:list={{ "is-current": isCurrent(introHref) }}>
+            Portada
+          </a>
+        </div>
+      </section>
+
+      {sections.map((section) => {
+        const sectionHref = `/secciones/${section.slug}/`;
+        const sectionChapters = chapters.filter((chapter) => chapter.data.sectionSlug === section.slug);
+        return (
+          <details class="book-nav__section" open={isWithin(sectionHref)}>
+            <summary class:list={{ "is-current": isCurrent(sectionHref) }}>
+              <span>{section.data.bookLabel ?? "Seccion"}</span>
+              <strong>{section.data.title}</strong>
+            </summary>
+
+            <div class="book-nav__chapter-list">
+              {sectionChapters.map((chapter) => {
+                const chapterHref = `${sectionHref}${chapter.slug}/`;
+                return (
+                  <a href={withBase(chapterHref)} class:list={{ "is-current": isCurrent(chapterHref) }}>
+                    {chapter.data.title}
+                  </a>
+                );
+              })}
+            </div>
+          </details>
+        );
+      })}
+    </nav>
+
+    <div class="book-sidebar__footer">
+      <p class="book-nav__eyebrow">Libro</p>
+      <p>Portada, secciones, capitulos y herramientas de apoyo.</p>
+    </div>
+  </div>
+</aside>

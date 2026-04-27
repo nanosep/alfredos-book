@@ -1,0 +1,11 @@
+{
+  "id": "junio-podas-frutales",
+  "month": 6,
+  "title": "Poda ligera y seguimiento de frutales",
+  "sectionSlug": "frutales-bosque-autoctono",
+  "taskType": "poda",
+  "priority": "medium",
+  "summary": "Revisar vigor, sanidad y necesidades de intervencion ligera en pomar y frutales de apoyo.",
+  "relatedChapterSlugs": ["arboles-frutales", "el-pomar"],
+  "calculatorSlugs": []
+}
