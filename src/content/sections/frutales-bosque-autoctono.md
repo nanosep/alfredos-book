@@ -1,6 +1,6 @@
 ---
-title: "Frutales y Bosque Autoctono"
-bookLabel: "Seccion VI"
+title: "Frutales y Bosque Autóctono"
+bookLabel: "Sección VI"
 order: 6
 summary: "Bloque sobre frutales, pomar, bosque autoctono, frutos secos y frutos rojos."
 chapterSlugs:

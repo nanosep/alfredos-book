@@ -5,7 +5,7 @@
   "sectionSlug": "frutales-bosque-autoctono",
   "taskType": "poda",
   "priority": "medium",
-  "summary": "Revisar vigor, sanidad y necesidades de intervencion ligera en pomar y frutales de apoyo.",
+  "summary": "Revisar vigor, sanidad y necesidades de intervención ligera en pomar y frutales de apoyo.",
   "relatedChapterSlugs": ["arboles-frutales", "el-pomar"],
-  "calculatorSlugs": []
+  "calculatorSlugs": ["plantacion-frutal"]
 }

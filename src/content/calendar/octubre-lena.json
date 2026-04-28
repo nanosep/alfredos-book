@@ -1,11 +1,11 @@
 {
   "id": "octubre-lena",
   "month": 10,
-  "title": "Acopio y clasificacion de leña",
+  "title": "Acopio y clasificación de leña",
   "sectionSlug": "gestion-termica",
   "taskType": "acopio de leña",
   "priority": "high",
   "summary": "Verificar volumen de leña seca, ordenar por uso y asegurar margen antes del invierno.",
   "relatedChapterSlugs": ["la-lena"],
-  "calculatorSlugs": []
+  "calculatorSlugs": ["consumo-lena"]
 }

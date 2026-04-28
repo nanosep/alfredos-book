@@ -7,5 +7,5 @@
   "priority": "high",
   "summary": "Aprovechar picos de cosecha para transformar excedentes en botes y reservas de largo plazo.",
   "relatedChapterSlugs": ["las-conservas"],
-  "calculatorSlugs": []
+  "calculatorSlugs": ["reserva-conservas"]
 }

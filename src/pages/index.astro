@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { fullPrologueParagraphs } from "../data/prologue";
 import { withBase } from "../lib/paths";
 ---
 
@@ -46,7 +47,7 @@ import { withBase } from "../lib/paths";
         <p>
           La autosuficiencia aqu&iacute; no se presenta como nostalgia ni como huida. Es una
           disciplina: observar, calcular, reparar, cultivar, conservar y proteger. La
-          finca de dos hectareas funciona como unidad de trabajo, refugio y escuela.
+          finca de dos hect&aacute;reas funciona como unidad de trabajo, refugio y escuela.
         </p>
       </article>
     </section>
@@ -57,23 +58,26 @@ import { withBase } from "../lib/paths";
         <h2 id="prologo-title">Tratado breve sobre la autosuficiencia integral</h2>
         <p>
           El pr&oacute;logo se ordena aqu&iacute; como lectura de entrada: menos bloque continuo,
-          mas ritmo visual y una idea clara por tramo.
+          m&aacute;s ritmo visual y una idea clara por tramo.
         </p>
+        <button class="cover-inline-action" type="button" data-prologue-open>
+          Leer pr&oacute;logo &iacute;ntegro
+        </button>
       </div>
 
       <article class="prologue-block prologue-block--lead">
         <div>
-          <p class="eyebrow">I. Autonomia</p>
-          <h3>No volver atras, sino aprender a sostenerse</h3>
+          <p class="eyebrow">I. Autonom&iacute;a</p>
+          <h3>No volver atr&aacute;s, sino aprender a sostenerse</h3>
           <p>
-            La transicion hacia la autonomia plena en el siglo XXI no representa un
-            retroceso tecnologico, sino una evolucion hacia la madurez tecnica y la
+            La transici&oacute;n hacia la autonom&iacute;a plena en el siglo XXI no representa un
+            retroceso tecnol&oacute;gico, sino una evoluci&oacute;n hacia la madurez t&eacute;cnica y la
             responsabilidad individual. En un contexto de fragilidad en las redes de
             suministro, una finca bien pensada se convierte en infraestructura propia.
           </p>
           <p>
-            La propuesta de <em>Salvese quien pueda</em> es sistemica: agua, energia,
-            alimento, salud, herramientas, bosque y seguridad no son capitulos
+            La propuesta de <em>S&aacute;lvese quien pueda</em> es sist&eacute;mica: agua, energ&iacute;a,
+            alimento, salud, herramientas, bosque y seguridad no son cap&iacute;tulos
             aislados, sino piezas de un organismo que debe funcionar con redundancia.
           </p>
         </div>
@@ -87,17 +91,17 @@ import { withBase } from "../lib/paths";
           <img src={withBase("/media/cover/cover-agua-energia.png")} alt="Paneles solares, deposito de agua y bomba en una finca rural" />
         </figure>
         <div>
-          <p class="eyebrow">II. Agua y energia</p>
+          <p class="eyebrow">II. Agua y energ&iacute;a</p>
           <h3>Los dos sistemas que lo sostienen todo</h3>
           <p>
-            El agua es el eje central de cualquier proyecto de autonomia rural: hidrata,
-            riega, limpia y, cuando la topografia lo permite, produce energia. Por eso
-            la gestion hidrica debe combinar captacion, almacenamiento, potabilizacion
+            El agua es el eje central de cualquier proyecto de autonom&iacute;a rural: hidrata,
+            riega, limpia y, cuando la topograf&iacute;a lo permite, produce energ&iacute;a. Por eso
+            la gesti&oacute;n h&iacute;drica debe combinar captaci&oacute;n, almacenamiento, potabilizaci&oacute;n
             y mantenimiento sanitario.
           </p>
           <p>
-            La electricidad completa esa base. Fotovoltaica, baterias, microhidraulica
-            y comunicaciones no son comodidades: son la condicion para que la finca
+            La electricidad completa esa base. Fotovoltaica, bater&iacute;as, microhidr&aacute;ulica
+            y comunicaciones no son comodidades: son la condici&oacute;n para que la finca
             siga operando cuando el entorno falla.
           </p>
         </div>
@@ -110,7 +114,7 @@ import { withBase } from "../lib/paths";
           <p>
             La operatividad de una finca depende de su taller. Un banco ordenado,
             herramientas bien elegidas y capacidad de soldar, cortar, afilar y
-            diagnosticar convierten una averia en una tarea, no en una crisis.
+            diagnosticar convierten una aver&iacute;a en una tarea, no en una crisis.
           </p>
           <p>
             La autosuficiencia real no se mide solo por lo que se produce, sino por lo
@@ -131,7 +135,7 @@ import { withBase } from "../lib/paths";
           <p class="eyebrow">IV. Tierra y alimento</p>
           <h3>Cerrar ciclos, no acumular objetos</h3>
           <p>
-            El suelo es el capital biologico de la finca. Compost, rotaciones, frutales,
+            El suelo es el capital biol&oacute;gico de la finca. Compost, rotaciones, frutales,
             bosque, gallinas, abejas y conservas forman una cadena: producir, transformar
             y guardar para atravesar el invierno.
           </p>
@@ -159,22 +163,65 @@ import { withBase } from "../lib/paths";
     <section class="cover-dedication">
       <p class="eyebrow">Dedicatoria</p>
       <h2>A mis sobrinos</h2>
-      <p>Camen, Mila, Alfonso, Javier, Dora, Celso, Laura, Teresa e Inigo.</p>
+      <p>Carmen, Mila, Alfonso, Javier, Dora, Celso, Laura, Teresa e &Iacute;&ntilde;igo.</p>
     </section>
 
     <section class="cover-author-note">
       <p class="eyebrow">Sobre el autor</p>
-      <h2>Alfredo Garc&iacute;a de Tu&ntilde;on</h2>
+      <h2>Alfredo Garc&iacute;a de Tu&ntilde;&oacute;n</h2>
       <p>
         Cazador, lector voraz y hombre de curiosidad renacentista, Alfredo Garc&iacute;a
-        de Tu&ntilde;on mira la finca como otros miran un mapa antiguo: un territorio de
+        de Tu&ntilde;&oacute;n mira la finca como otros miran un mapa antiguo: un territorio de
         aventura, memoria y responsabilidad. Le interesan la historia, los viajes,
-        los oficios utiles y esa clase de conocimiento que se aprende con las manos,
+        los oficios &uacute;tiles y esa clase de conocimiento que se aprende con las manos,
         caminando el monte o escuchando a quienes saben. Este libro nace de esa
-        mezcla de inquietud y experiencia: la pregunta sencilla, y cada vez mas
-        urgente, de que haria falta saber para sostener una vida mas libre, mas
+        mezcla de inquietud y experiencia: la pregunta sencilla, y cada vez m&aacute;s
+        urgente, de qu&eacute; har&iacute;a falta saber para sostener una vida m&aacute;s libre, m&aacute;s
         preparada y menos dependiente.
       </p>
     </section>
+
+    <dialog class="prologue-dialog" data-prologue-dialog aria-labelledby="prologue-dialog-title">
+      <div class="prologue-dialog__panel">
+        <header class="prologue-dialog__header">
+          <div>
+            <p class="eyebrow">Texto original</p>
+            <h2 id="prologue-dialog-title">Pr&oacute;logo completo</h2>
+          </div>
+          <button class="prologue-dialog__close" type="button" data-prologue-close aria-label="Cerrar pr&oacute;logo">
+            Cerrar
+          </button>
+        </header>
+        <div class="prologue-dialog__body">
+          {fullPrologueParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </div>
+    </dialog>
   </main>
+
+  <script>
+    const dialog = document.querySelector("[data-prologue-dialog]");
+    const openButtons = document.querySelectorAll("[data-prologue-open]");
+    const closeButton = document.querySelector("[data-prologue-close]");
+
+    if (dialog instanceof HTMLDialogElement) {
+      openButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (typeof dialog.showModal === "function") {
+            dialog.showModal();
+            return;
+          }
+
+          dialog.setAttribute("open", "");
+        });
+      });
+
+      closeButton?.addEventListener("click", () => dialog.close());
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) {
+          dialog.close();
+        }
+      });
+    }
+  </script>
 </BaseLayout>

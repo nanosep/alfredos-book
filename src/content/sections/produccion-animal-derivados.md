@@ -1,6 +1,6 @@
 ---
-title: "Produccion Animal y Derivados"
-bookLabel: "Seccion VIII"
+title: "Producción Animal y Derivados"
+bookLabel: "Sección VIII"
 order: 8
 summary: "Bloque sobre gallinero, apicultura y queso."
 chapterSlugs:

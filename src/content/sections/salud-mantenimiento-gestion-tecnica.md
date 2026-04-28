@@ -1,6 +1,6 @@
 ---
-title: "Salud, Mantenimiento y Gestion Tecnica"
-bookLabel: "Seccion III"
+title: "Salud, Mantenimiento y Gestión Técnica"
+bookLabel: "Sección III"
 order: 3
 summary: "Bloque sobre botiquin, emergencias, mantenimiento y respuesta tecnica en la finca."
 chapterSlugs:

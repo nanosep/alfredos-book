@@ -1,6 +1,6 @@
 ---
-title: "Tecnicas de conservacion"
-bookLabel: "Seccion IX"
+title: "Técnicas de conservación"
+bookLabel: "Sección IX"
 order: 9
 summary: "Bloque sobre conservas y almacenamiento de alimentos."
 chapterSlugs:

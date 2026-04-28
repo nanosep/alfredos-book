@@ -1,11 +1,11 @@
 {
   "id": "abril-control-plagas",
   "month": 4,
-  "title": "Iniciar control biologico de plagas",
+  "title": "Iniciar control biológico de plagas",
   "sectionSlug": "huerta-gestion-suelo",
-  "taskType": "mantenimiento energetico",
+  "taskType": "mantenimiento biológico",
   "priority": "medium",
-  "summary": "Revisar presion temprana de plagas, reforzar diversidad biologica y preparar respuestas no quimicas.",
+  "summary": "Revisar presión temprana de plagas, reforzar diversidad biológica y preparar respuestas no químicas.",
   "relatedChapterSlugs": ["sanidad-vegetal"],
   "calculatorSlugs": []
 }

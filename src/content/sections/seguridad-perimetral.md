@@ -1,6 +1,6 @@
 ---
 title: "Seguridad perimetral"
-bookLabel: "Seccion XII"
+bookLabel: "Sección XII"
 order: 11
 summary: "Bloque sobre proteccion, iluminacion por sensores y seguridad del perimetro."
 chapterSlugs:

@@ -1,6 +1,6 @@
 ---
-title: "Cultivo, produccion y elaboracion"
-bookLabel: "Seccion VII"
+title: "Cultivo, producción y elaboración"
+bookLabel: "Sección VII"
 order: 7
 summary: "Bloque de cultivo y elaboracion segun el cuerpo del libro."
 chapterSlugs:

@@ -5,7 +5,7 @@
   "sectionSlug": "huerta-gestion-suelo",
   "taskType": "trasplante",
   "priority": "high",
-  "summary": "Mover plantones a su ubicacion definitiva y revisar necesidades de agua a medida que suben las temperaturas.",
+  "summary": "Mover plantones a su ubicación definitiva y revisar necesidades de agua a medida que suben las temperaturas.",
   "relatedChapterSlugs": ["el-huerto"],
-  "calculatorSlugs": []
+  "calculatorSlugs": ["superficie-huerto"]
 }

@@ -1,6 +1,6 @@
 ---
-title: "Ingenieria Energetica y Comunicaciones"
-bookLabel: "Seccion II"
+title: "Ingeniería Energética y Comunicaciones"
+bookLabel: "Sección II"
 order: 2
 summary: "Bloque sobre electricidad, conectividad, iluminacion y sistemas de apoyo tecnico."
 chapterSlugs:

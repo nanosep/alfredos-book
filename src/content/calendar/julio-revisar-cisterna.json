@@ -3,9 +3,9 @@
   "month": 7,
   "title": "Controlar reservas de cisterna en estiaje",
   "sectionSlug": "fundamentos-infraestructura-hidrica",
-  "taskType": "revision tecnica",
+  "taskType": "revisión técnica",
   "priority": "critical",
-  "summary": "Comparar captacion prevista y consumo real durante los meses secos para anticipar restricciones o refuerzos.",
+  "summary": "Comparar captación prevista y consumo real durante los meses secos para anticipar restricciones o refuerzos.",
   "relatedChapterSlugs": ["el-agua"],
   "calculatorSlugs": ["captacion-lluvia"]
 }

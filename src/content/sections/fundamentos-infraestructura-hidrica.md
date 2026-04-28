@@ -1,6 +1,6 @@
 ---
-title: "Fundamentos e Infraestructura Hidrica"
-bookLabel: "Seccion I"
+title: "Fundamentos e Infraestructura Hídrica"
+bookLabel: "Sección I"
 order: 1
 summary: "Bloque dedicado al agua, su captacion, almacenamiento, tratamiento y uso estrategico en la finca."
 chapterSlugs:

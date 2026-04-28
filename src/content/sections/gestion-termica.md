@@ -1,6 +1,6 @@
 ---
-title: "Gestion termica"
-bookLabel: "Seccion XI"
+title: "Gestión térmica"
+bookLabel: "Sección XI"
 order: 10
 summary: "Bloque sobre leña, cocina, chimenea y gestion termica domestica."
 chapterSlugs:

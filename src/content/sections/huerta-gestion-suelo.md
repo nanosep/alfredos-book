@@ -1,6 +1,6 @@
 ---
-title: "La Huerta y la Gestion del Suelo"
-bookLabel: "Seccion V"
+title: "La Huerta y la Gestión del Suelo"
+bookLabel: "Sección V"
 order: 5
 summary: "Bloque sobre huerto, botica natural, plagas, compost y fertilizacion."
 chapterSlugs:

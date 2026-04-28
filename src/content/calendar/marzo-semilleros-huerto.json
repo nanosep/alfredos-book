@@ -7,5 +7,5 @@
   "priority": "high",
   "summary": "Preparar semilleros, revisar sustratos y organizar el calendario de siembra temprana.",
   "relatedChapterSlugs": ["el-huerto"],
-  "calculatorSlugs": []
+  "calculatorSlugs": ["superficie-huerto"]
 }

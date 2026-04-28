@@ -1,11 +1,11 @@
 {
   "id": "enero-revisar-captacion",
   "month": 1,
-  "title": "Revisar captacion y proteccion del manantial",
+  "title": "Revisar captación y protección del manantial",
   "sectionSlug": "fundamentos-infraestructura-hidrica",
-  "taskType": "revision tecnica",
+  "taskType": "revisión técnica",
   "priority": "high",
-  "summary": "Comprobar escorrentias, camara humeda, rebose y estado de proteccion del punto de captacion despues de lluvias fuertes.",
+  "summary": "Comprobar escorrentías, cámara húmeda, rebose y estado de protección del punto de captación después de lluvias fuertes.",
   "relatedChapterSlugs": ["el-agua"],
   "calculatorSlugs": ["captacion-lluvia"]
 }

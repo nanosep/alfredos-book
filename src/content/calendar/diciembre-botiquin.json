@@ -1,11 +1,11 @@
 {
   "id": "diciembre-botiquin",
   "month": 12,
-  "title": "Auditoria anual de botiquin y stock medico",
+  "title": "Auditoría anual de botiquín y stock médico",
   "sectionSlug": "salud-mantenimiento-gestion-tecnica",
-  "taskType": "revision tecnica",
+  "taskType": "revisión técnica",
   "priority": "high",
-  "summary": "Comprobar caducidades, reposicion y disponibilidad de material critico antes del invierno duro.",
+  "summary": "Comprobar caducidades, reposición y disponibilidad de material crítico antes del invierno duro.",
   "relatedChapterSlugs": ["botiquin-primeros-auxilios"],
   "calculatorSlugs": []
 }

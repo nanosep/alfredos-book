@@ -1,6 +1,6 @@
 ---
 title: "Herramientas, Maquinaria y Equipamiento"
-bookLabel: "Seccion IV"
+bookLabel: "Sección IV"
 order: 4
 summary: "Bloque sobre herramientas basicas, taller y equipamiento exterior."
 chapterSlugs:
